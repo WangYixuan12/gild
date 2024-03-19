@@ -1,6 +1,6 @@
 # GILD: Generalizable Imitation Learning with 3D Semantic Fields [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1Yk6uDg2So9A3yWALR7mF5dhl_KKR24eh?usp=sharing)
 
-[Website [Ongoing]](https://robopil.github.io/gild/) | [Paper [Coming soon]](https://arxiv.org/) | [Colab](https://colab.research.google.com/drive/1Yk6uDg2So9A3yWALR7mF5dhl_KKR24eh?usp=sharing) | [Video [Ongoing]](https://www.youtube.com)
+[Website](https://robopil.github.io/gild/) | [Paper [Coming soon]](https://arxiv.org/) | [Colab](https://colab.research.google.com/drive/1Yk6uDg2So9A3yWALR7mF5dhl_KKR24eh?usp=sharing) | [Video [Ongoing]](https://www.youtube.com)
 
 <a target="_blank" href="https://wangyixuan12.github.io/">Yixuan Wang</a><sup>1</sup>,
 <a target="_blank" href="https://binghao-huang.github.io/">Binghao Huang</a><sup>1</sup>,
