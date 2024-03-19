@@ -116,13 +116,15 @@ data_root = "/home/yixuan/gild"
 
 ckpt_path = f"{data_root}/data/outputs/knife/checkpoints/latest.ckpt"
 
-# dataset_dir = f"{data_root}/data/outputs/knife/eval_0"
-# epi_path = f"{dataset_dir}/episode_0.hdf5"
-# vis_time = 21 # the frame to visualize
-
-dataset_dir = f"{data_root}/data/outputs/knife/eval_1"
+scene_name = "knife_1"
+dataset_dir = f"{data_root}/data/outputs/knife/eval_0"
 epi_path = f"{dataset_dir}/episode_0.hdf5"
-vis_time = 13 # the frame to visualize
+vis_time = 21 # the frame to visualize
+
+# scene_name = "knife_2"
+# dataset_dir = f"{data_root}/data/outputs/knife/eval_1"
+# epi_path = f"{dataset_dir}/episode_0.hdf5"
+# vis_time = 13 # the frame to visualize
 
 ### load checkpoint
 payload = torch.load(open(ckpt_path, 'rb'), pickle_module=dill)
@@ -201,7 +203,7 @@ pcd_down, pcd_colors_down = voxel_downsample(pcd, pcd_color=pcd_colors, voxel_si
 pcd_down = (rotate_mat @ pcd_down.T).T
 raw_pcd = np2o3d(pcd_down, color=pcd_colors_down)
 
-vis_pcd_plotly([raw_pcd], size_ls=[4], output_name='raw_obs')
+vis_pcd_plotly([raw_pcd], size_ls=[4], output_name=f'{scene_name}_raw_obs')
 
 # infer actions
 obs_dict = data['obs']
@@ -241,7 +243,7 @@ d3fields_sim = d3fields[:, 3]
 d3fields_sim_color = cmap(d3fields_sim)[:,:3]
 d3fields_geo = (rotate_mat @ d3fields_geo.T).T
 input_d3fields_o3d = np2o3d(d3fields_geo, color=d3fields_sim_color)
-vis_pcd_plotly([input_d3fields_o3d], size_ls=[4], output_name='input')
+vis_pcd_plotly([input_d3fields_o3d], size_ls=[4], output_name=f'{scene_name}_input')
 
 # visualize 3D semantic fields
 d3fields_sim = distilled_feats[:, 0]
@@ -256,7 +258,7 @@ high_sim_mask = d3fields_sim > 0.6
 # transform feats_pcd to robot base frame
 feats_pcd = (rotate_mat @ feats_pcd.T).T # transform to better viewpoint in plotly
 d3fields_o3d = np2o3d(feats_pcd, color=d3fields_sim_color)
-vis_pcd_plotly([d3fields_o3d], size_ls=[4], output_name='d3fields')
+vis_pcd_plotly([d3fields_o3d], size_ls=[4], output_name=f'{scene_name}_d3fields')
 
 # visualize action
 pred_act_pos = pred_action_pos[0] # (T, 3*num_bots)
@@ -267,4 +269,4 @@ pred_act_pos_color = action_cmap(np.arange(act_len)/(act_len-1))[:,:3]
 pred_act_pos_color = np.repeat(pred_act_pos_color, num_bots, axis=0) # (T, 3)
 pred_act_pos_color = np.tile(pred_act_pos_color, (num_bots, 1)) # (T*num_bots, 3)
 pred_act_pos = (rotate_mat @ pred_act_pos.T).T
-vis_pcd_plotly([np2o3d(pred_act_pos, color=pred_act_pos_color), d3fields_o3d], size_ls=[6, 4], output_name='action')
+vis_pcd_plotly([np2o3d(pred_act_pos, color=pred_act_pos_color), d3fields_o3d], size_ls=[6, 4], output_name=f'{scene_name}_action')
