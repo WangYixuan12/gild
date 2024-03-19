@@ -41,7 +41,6 @@ https://github.com/WangYixuan12/gild/assets/32333199/f86c977b-bcce-45cf-b632-956
 
 ## TODO:
 - [ ] Update checkpoints download
-- [ ] Add Web
 
 ## :hammer: Install
 We recommend [Mambaforge](https://github.com/conda-forge/miniforge#mambaforge) instead of the standard anaconda distribution for faster installation: 
