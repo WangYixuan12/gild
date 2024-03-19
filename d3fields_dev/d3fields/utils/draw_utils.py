@@ -873,7 +873,7 @@ def vis_pcd_plotly(o3d_pcd_ls, up=None, center=None, eye=None, size_ls=2, output
 
         go_pcd.update_layout(scene_camera=camera)
 
-    go_pcd.update_layout(margin=dict(l=5,r=5,b=5,t=5,))
+    go_pcd.update_layout(margin=dict(l=5,r=5,b=5,t=5,), showlegend=False)
     go_pcd.show()
     if output_name is not None:
         go_pcd.write_html(f'{output_name}.html')

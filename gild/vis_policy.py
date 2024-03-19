@@ -114,17 +114,29 @@ def extract_pcd_from_data_dict(data_dict, t, fusion, shape_meta, kin_helper):
 ### hyperparam
 data_root = "/home/yixuan/gild"
 
-ckpt_path = f"{data_root}/data/outputs/knife/checkpoints/latest.ckpt"
-
-scene_name = "knife_1"
-dataset_dir = f"{data_root}/data/outputs/knife/eval_0"
-epi_path = f"{dataset_dir}/episode_0.hdf5"
-vis_time = 21 # the frame to visualize
+# scene_name = "knife_1"
+# ckpt_path = f"{data_root}/data/outputs/knife/checkpoints/latest.ckpt"
+# dataset_dir = f"{data_root}/data/outputs/knife/eval_0"
+# epi_path = f"{dataset_dir}/episode_0.hdf5"
+# vis_time = 21 # the frame to visualize
 
 # scene_name = "knife_2"
+# ckpt_path = f"{data_root}/data/outputs/knife/checkpoints/latest.ckpt"
 # dataset_dir = f"{data_root}/data/outputs/knife/eval_1"
 # epi_path = f"{dataset_dir}/episode_0.hdf5"
 # vis_time = 13 # the frame to visualize
+
+# scene_name = "can_1"
+# ckpt_path = f"{data_root}/data/outputs/can/checkpoints/epoch=400.ckpt"
+# dataset_dir = f"{data_root}/data/outputs/can/eval_0"
+# epi_path = f"{dataset_dir}/episode_0.hdf5"
+# vis_time = 11 # the frame to visualize
+
+scene_name = "can_2"
+ckpt_path = f"{data_root}/data/outputs/can/checkpoints/epoch=400.ckpt"
+dataset_dir = f"{data_root}/data/outputs/can/eval_1"
+epi_path = f"{dataset_dir}/episode_0.hdf5"
+vis_time = 30 # the frame to visualize
 
 ### load checkpoint
 payload = torch.load(open(ckpt_path, 'rb'), pickle_module=dill)
@@ -166,7 +178,8 @@ noise_scheduler = diffusers.schedulers.scheduling_ddim.DDIMScheduler(
     prediction_type='epsilon'
 )
 if 'd3fields' in cfg.task.dataset.shape_meta['obs']:
-    cfg.task.dataset.shape_meta['obs']['d3fields']['info']['boundaries']['z_lower'] = 0.022
+    # cfg.task.dataset.shape_meta['obs']['d3fields']['info']['boundaries']['z_lower'] = 0.022 # knife
+    cfg.task.dataset.shape_meta['obs']['d3fields']['info']['boundaries']['z_lower'] = 0.025 # can
 policy.noise_scheduler = noise_scheduler
 
 # create dataset class
